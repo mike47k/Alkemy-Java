@@ -11,5 +11,7 @@ public interface IPeliculaSerieService {
 	public void eliminarPeliculaSerie(Integer id);
 	public List<PeliculaSerie> obtenerPeliculaSeries();
 	public Optional<PeliculaSerie> obtenerPeliculaSeriesPorId(Integer id);
+	public List<PeliculaSerie> busquedaPeliculas(String titulo,Integer id);
+
 
 }

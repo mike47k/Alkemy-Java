@@ -11,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -21,9 +24,15 @@ public class PeliculaSerie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotBlank
 	private String imagen;
+	@NotBlank
 	private String titulo;
+	@NotBlank
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate fechaDeCreacion;
+	@NotBlank
+	@Max(value = 5)
 	private Integer calificacion;
 	
 	@JsonIgnoreProperties("peliculas")

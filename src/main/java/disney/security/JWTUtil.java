@@ -5,13 +5,14 @@ import java.util.Date;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import disney.utils.Configs;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTUtil {
-	private static final String llave = "cris";
+	private static final String llave = Configs.JWT_KEY;
 
 	public String generarToken(UserDetails userDetails) {
 		return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date())

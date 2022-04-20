@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,7 +23,9 @@ public class Genero {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotBlank
 	private String nombre;
+	@NotBlank
 	private String imagen;
 	@JsonIgnoreProperties("generos")
 	@JoinTable(

@@ -1,6 +1,7 @@
 package disney.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import disney.model.Genero;
 import disney.model.PeliculaSerie;
 import disney.model.Personaje;
 import disney.service.IGeneroService;
@@ -31,8 +34,27 @@ public class PeliculaSerieController {
 	private IGeneroService generoService;
 	
 	@GetMapping
-	public List<PeliculaSerie> busquedaMostrarPeliculaSerie(){
-		return peliculaSerieService.obtenerPeliculaSeries();
+	public List<PeliculaSerie> busquedaMostrarPeliculaSerie(@RequestParam(required = false)String name,
+															@RequestParam(required = false)Integer genre,
+															@RequestParam(required = false,defaultValue = "desc")String order){
+		List<PeliculaSerie> pelis = new ArrayList<>();		
+		System.out.println(name);
+		if (name == null && genre == null) {
+			pelis = peliculaSerieService.obtenerPeliculaSeries();
+		} else {
+			pelis = peliculaSerieService.busquedaPeliculas(name, genre);
+			}
+		System.out.println(order.contains("asc"));
+		if (order.contains("asc")) {
+			pelis.sort(Comparator.comparing(PeliculaSerie::getFechaDeCreacion));
+		}else {
+			pelis.sort(Comparator.comparing(PeliculaSerie::getFechaDeCreacion).reversed());
+		}
+		
+		return pelis;
+			
+		
+		
 		
 	}
 	
@@ -42,6 +64,7 @@ public class PeliculaSerieController {
 		
 		
 		List<Personaje> personajes = peliculaSerie.getPersonajes() ;
+		List<Genero> generos = peliculaSerie.getGeneros();
 		final PeliculaSerie pGuardada = peliculaSerieService.guardarPeliculaSerie(peliculaSerie);
 		if (peliculaSerie.getPersonajes() != null) {
 		
@@ -56,13 +79,26 @@ public class PeliculaSerieController {
 			});
 		}
 		
+		if (peliculaSerie.getGeneros() != null) {
+			
+			generos.forEach((g)->{
+				Genero auxG = new Genero();
+				List<PeliculaSerie> pelis = new ArrayList<>();
+				auxG=generoService.obtenerGeneroPorId(g.getId()).get();
+				pelis = auxG.getPeliculasG();
+				pelis.add(pGuardada);
+				auxG.setPeliculasG(pelis);
+				generoService.guardarGenero(auxG);
+			});
+		}
+		
 		
 		
 		return peliculaSerieService.obtenerPeliculaSeriesPorId(pGuardada.getId()).get();
 	}
 	
 	@GetMapping("/{id}")
-	public PeliculaSerie obtenerPersonajePorId(Integer id) {
+	public PeliculaSerie obtenerPersonajePorId(@PathVariable(value= "id")Integer id) {
 		return peliculaSerieService.obtenerPeliculaSeriesPorId(id).get();
 	}
 	

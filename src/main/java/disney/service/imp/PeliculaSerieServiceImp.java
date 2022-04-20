@@ -1,5 +1,6 @@
 package disney.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,25 @@ public class PeliculaSerieServiceImp implements IPeliculaSerieService{
 		// TODO Auto-generated method stub
 		return peliculaSerieRepository.findById(id);
 	}
+
+	@Override
+	public List<PeliculaSerie> busquedaPeliculas(String titulo, Integer id) {
+		// TODO Auto-generated method stub
+		List<PeliculaSerie> pelis = new ArrayList<>();
+		if (titulo != null && id != null) {
+			pelis =  peliculaSerieRepository.findByTituloContainingAndGenerosId(titulo, id);
+		} else {
+			if (id == null) {
+				pelis = peliculaSerieRepository.findByTituloContaining(titulo);
+			} else {
+				pelis = peliculaSerieRepository.findByGenerosId(id);
+			}
+		}
+		return pelis;
+		
+		
+	}
+
+
 
 }

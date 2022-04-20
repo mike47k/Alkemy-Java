@@ -1,0 +1,511 @@
+{
+	"info": {
+		"_postman_id": "f9e08a4a-6999-4135-81a5-62e6cffa162f",
+		"name": "Alkemy-Disney-Api",
+		"description": "Documentacion para una API de personajes de Disney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"usuario\",\n    \"password\":\"contrasenia\",\n    \"email\":\"ejemplo@gmail.com\",\n    \"nombre\":\"Cristian\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"usuario\",\n    \"password\":\"contrasenia\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personajes",
+			"item": [
+				{
+					"name": "Buscar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Micky Mouse",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "movies",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar-Editar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"imagen\": \"urlImagen.jpg\",\n        \"nombre\": \"Personaje\",\n        \"edad\": 20,\n        \"peso\": 60,\n        \"historia\":\"\",\n        \"peliculas\": [{\"id\":1},{\"id\":2}]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Generos",
+			"item": [
+				{
+					"name": "Obtener Generos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gender",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gender"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar-Editar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"imagen\": \"urlImagen.jpg\",\n        \"nombre\": \"Fantasia\",\n        \"peliculasG\": [{\"id\":1},{\"id\":2}]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gender",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gender"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gender/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gender",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gender/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gender",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Peliculas",
+			"item": [
+				{
+					"name": "Buscar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "pelicula",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "asc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar-Editar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"imagen\": \"imagen.jpg\",\n        \"titulo\": \"Pelicula\",\n        \"fechaDeCreacion\": \"2009-10-25\",\n        \"calificacion\": 4,\n        \"personajes\": [{\"id\":1},{\"id\":2}],\n        \"generos\": [{\"id\":1}]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unir Personaje Pelicula",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/{idMovies}/characters/{idChar}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"{idMovies}",
+								"characters",
+								"{idChar}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Desunir Personaje Pelicula",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer \"Token obtenido al autenticarse\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/{idMovies}/characters/{idChar}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"{idMovies}",
+								"characters",
+								"{idChar}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

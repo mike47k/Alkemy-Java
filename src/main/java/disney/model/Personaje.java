@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,10 +24,15 @@ public class Personaje {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotBlank
 	private String imagen;
+	@NotBlank
 	private String nombre;
+	@NotBlank
 	private Integer edad;
+	@NotBlank
 	private Double peso;
+	@NotBlank
 	private String historia;
 	@JsonIgnoreProperties("personajes")
 	 @JoinTable(
